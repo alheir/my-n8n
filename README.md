@@ -12,7 +12,9 @@ This repository provides a minimal local setup for running [n8n](https://n8n.io/
 
 The n8n container runs locally on `http://localhost:5678`.
 
-`WEBHOOK_URL` is set from the `NGROK_URL` environment variable so n8n can generate public webhook URLs that point to your ngrok tunnel.
+`N8N_HOST` is set from `NGROK_HOST` env var, and the public URLs are derived from that same host inside Docker Compose.
+
+`N8N_MCP_BASE_URL` also derives from `NGROK_HOST`, so MCP-related features resolve against the same public endpoint.
 
 ## Setup
 
@@ -29,7 +31,7 @@ The n8n container runs locally on `http://localhost:5678`.
 2. Create a `.env` file in the project root.
 
 	```env
-	NGROK_URL=https://<your-ngrok-domain-or-public-url>
+	NGROK_HOST=<your-ngrok-domain>
 	```
 
 3. Start n8n with Docker Compose.
@@ -58,4 +60,4 @@ docker compose down         # Stop and remove the Compose services
 
 - The n8n image is pinned to version `2.30.4` for reproducible local setups.
 - Data is stored in the `n8n_data` Docker volume, so it persists across container restarts.
-- If ngrok changes its public URL, update `NGROK_URL` and restart the n8n container.
+- If ngrok changes its public host, update `NGROK_HOST`, then restart the n8n container.

@@ -15,7 +15,7 @@ services:
       - N8N_HOST=${NGROK_HOST}
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
-      - N8N_WEBHOOK_URL=${NGROK_URL}/
+      - N8N_WEBHOOK_URL=https://${NGROK_HOST}/
       
       # Security and reverse proxy (ngrok)
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
@@ -24,7 +24,7 @@ services:
       
       # Features and AI (MCP)
       - N8N_TELEMETRY_ENABLED=false
-      - N8N_MCP_BASE_URL=${NGROK_URL}
+      - N8N_MCP_BASE_URL=https://${NGROK_HOST}
     volumes:
       - n8n_data:/home/node/.n8n
 
